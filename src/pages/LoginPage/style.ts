@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
-    width: 99vw;
+    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
 
     .round__one {
         display: none;
@@ -21,7 +22,7 @@ export const Main = styled.main`
     }
 
     .cloud__section {
-        margin-top: 4rem;
+        margin-top: 8rem;
         width: 100%;
         height: 70%;
     }
@@ -132,8 +133,12 @@ export const Main = styled.main`
             right: 100px;
         }
 
-            .credits {
+        .credits {
             margin: 40px;
+        }
+
+        .cloud__section {
+            margin-top: 150px;
         }
 
         .content__container {

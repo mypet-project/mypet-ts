@@ -19,56 +19,50 @@ export const FormRegister = () => {
   const {submitRegister} = useContext(UserContext)
 
   return (
-    <StyledFormRegister onSubmit={handleSubmit(submitRegister)} noValidate>
-      <h1>Crie sua conta</h1>
 
-      <div className="containerInputs">
+    <StyledFormRegister onSubmit={handleSubmit(submitRegister)} noValidate>
+      <div className="container__inputs">
         <InputFormRegister
-          placeholder="Digite o seu nome..."
+          date={0} placeholder="Digite o seu nome..."
           label="Nome"
           type="text"
           id="nome"
           {...register("name")}
-          error={errors.name?.message}
-        />
+          error={errors.name?.message}        />
         <InputFormRegister
-          placeholder="Digite o seu e-mail..."
+          date={0} placeholder="Digite o seu e-mail..."
           label="E-mail"
           type="email"
           id="e-mail"
           {...register("email")}
-          error={errors.email?.message}
-        />
+          error={errors.email?.message}        />
         <InputFormRegister
-          placeholder="Digite sua senha..."
+          date={0} placeholder="Digite sua senha..."
           label="Senha"
           type="password"
           id="senha"
           {...register("password")}
-          error={errors.password?.message}
-        />
+          error={errors.password?.message}        />
         <InputFormRegister
-          placeholder="Confirme sua senha..."
+          date={0} placeholder="Confirme sua senha..."
           label="Confime sua senha"
           type="password"
           id="confirmaSenha"
           {...register("confirmPassword")}
-          error={errors.confirmPassword?.message}
-        />
+          error={errors.confirmPassword?.message}        />
         <InputFormRegister
-          placeholder="dd/mm/aa."
+          date={0} placeholder="dd/mm/aa."
           label="Data de Nascimento"
-          type="data"
+          type="date"
           id="dataNascimento"
           {...register("birthData")}
-          error={errors.birthData?.message}
-        />
+          error={errors.birthData?.message}        />
       </div>
 
-      <div className="containerButtons">
+      <div className="container__buttons">
           <button type="submit">Cadastrar</button>
-          <p>Ja possui sua conta</p>
-          <Link to="/"> Login</Link>
+          <p>Já possui sua conta?</p>
+          <Link to="/" className="login__button">Login</Link>
       </div>
     </StyledFormRegister>
   );

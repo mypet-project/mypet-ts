@@ -1,42 +1,47 @@
 import styled from "styled-components";
 
 export const StyledFormRegister = styled.form`
-    width:100%;
+    width: 100%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
-    background-color: red;
+    background-color: var(--white);
     border-radius: 22px;
     padding: 23px 20px;
 
-    h1{
-        text-align: center;
-        font-size: 22px;
+    label {
+        font-size: 1rem;
+        color: var(--black);
     }
 
-    .containerInputs{
+    input {
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        border: 1px solid white;
-        margin-bottom: 25px
+        border: 0.063rem solid var(--primary-color);
+        height: 2.188rem;
+        border-radius: 0.313rem;
+        padding: 0.5rem;
+        margin-bottom: 0.3rem;
+
+        ::placeholder {
+            color: var(--tertiary-gray);
+        }
     }
     
-    .containerButtons{
+    .container__buttons {
         display: flex;
         flex-direction: column;
-        border: 1px solid blue;
         gap: 5px;
 
         button {
-        border-radius: 5px;
-        background-color: #8AB59B;
-        padding: 9px;
-        font-weight: 500;
-        font-size: 0.8rem;
+            margin-top: 0.5rem;
+            width: 100%;
+            height: 2.375rem;
+            background: var(--tertiary-green);
+            border-radius: 0.313rem;
+            color: var(--black);
 
             :hover {
-                background-color: var(--color-primary-0);
+                background-color: var(--secondary-green);
             }
         }
 
@@ -44,18 +49,45 @@ export const StyledFormRegister = styled.form`
             text-align: center;
         }
 
-        a{
+        .login__button {
+            width: 100%;
+            height: 2.375rem;
+            background: var(--black);
+            border-radius: 0.313rem;
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-decoration: none;
-            text-align: center;
-            color: white;
-            border: 2px solid transparent;
-            border-radius: 5px;
-            background-color: black;
-            padding: 9px;
-            font-size: 0.5994rem;
+
             :hover {
-            background-color: white;
+                background-color: var(--primary-gray);
             }
+        }
+    }
+
+    @media (min-width: 769px) {
+        width: 463px;
+        height: 645px;
+        label {
+                font-size: 20px;
+            }
+
+            input {
+                height: 53px;
+                font-size: 20px;
+            }
+
+            .container__buttons {
+                button {
+                    height: 51px;
+                    font-size: 20px;
+                }
+
+                .login__button {
+                    height: 51px;
+                    font-size: 20px;
+                }
         }
     }
 `

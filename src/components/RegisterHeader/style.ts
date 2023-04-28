@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
-    width: 99vw;
+    position: fixed;
+    width: 100vw;
     border-radius: 0rem 0rem 0.625rem 0.625rem;
     background-color: var(--primary-color);
     height: 4.475rem;
@@ -24,7 +25,7 @@ export const Header = styled.header`
     }
 
     .login__register__div {
-        width: 8.5rem;
+        width: 9.5rem;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -76,7 +77,7 @@ export const Header = styled.header`
 
         .login__register__div {
             margin-right: 0;
-            width: 200px;
+            width: 220px;
 
             span {
                 font-size: 20px;
