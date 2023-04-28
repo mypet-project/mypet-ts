@@ -49,6 +49,7 @@ export const Main = styled.main`
         padding: 2rem;
         align-items: center;
         justify-content: space-between;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px;
     }
 
     .register__button {
