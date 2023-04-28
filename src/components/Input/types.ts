@@ -5,6 +5,7 @@ export interface IInputFormRegisterProps extends InputHTMLAttributes<HTMLInputEl
     type: string;
     id: string;
     error?: string;
+    date: number;
 }
 
 export interface ISInputProps{
