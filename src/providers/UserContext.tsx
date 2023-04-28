@@ -2,7 +2,16 @@ import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
+import { AxiosError } from "axios";
 
+
+interface ISubmitRegisterParameter {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
+  birthData: string;
+}
 
 export interface ILogin {
   email: string;
@@ -14,6 +23,9 @@ interface IUserProviderProps {
 }
 
 interface IUserContext {
+  submitRegister: (
+    formaRegisterData: ISubmitRegisterParameter
+  ) => Promise<void>;
     submitLogin: (loginData: ILogin) => void;
 }
 
@@ -25,6 +37,19 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate()
+
+    async function submitRegister(formaRegisterData: ISubmitRegisterParameter) {
+      delete formaRegisterData.confirmPassword;
+      try {
+        const response = await api.post("/register", formaRegisterData);
+        toast.success("Conta criada com sucesso!");
+        setTimeout(() => {
+          navigate("/");
+        }, 2500);
+      } catch (error) {
+        toast.error("email ja cadastrado");
+      }
+    }
 
     async function submitLogin (formData: ILogin) {
       console.log(formData)
@@ -49,7 +74,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   return (
     <UserContext.Provider
-      value={{ submitLogin }}
+      value={{ submitRegister, submitLogin }}
     >
       {children}
     </UserContext.Provider>
