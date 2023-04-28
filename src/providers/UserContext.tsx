@@ -27,17 +27,21 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     const navigate = useNavigate()
 
     async function submitLogin (formData: ILogin) {
+      console.log(formData)
         try {
-            const response = await api.post("users", formData);
-            console.log(response)
+            const response = await api.post("login", formData);
             toast.success("Login feito com sucesso!");
+
             const { user: userResponse, accessToken: token } = response.data;
             setUser(userResponse);
             localStorage.setItem("@mypet:token", JSON.stringify(token));
+
             navigate("/dashboard");
+
           } catch (error: any) {
             console.log(error)
             toast.error(error.message);
+
           } finally {
             setLoading(false);
           }
