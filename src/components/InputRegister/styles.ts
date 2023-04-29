@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledInputFormRegister = styled.div`
+export const StyledInput = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -8,6 +8,7 @@ export const StyledInputFormRegister = styled.div`
     p {
         color: red;
         font-size: 0.6106rem;
+        margin: 0;
     }
 
     @media (min-width: 1024px) {
