@@ -10,7 +10,7 @@ interface ISubmitRegisterParameter {
   email: string;
   password: string;
   confirmPassword?: string;
-  birthData: string;
+  birthDate: string;
 }
 
 export interface ILogin {
@@ -47,7 +47,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           navigate("/");
         }, 2500);
       } catch (error) {
-        toast.error("email ja cadastrado");
+        toast.error("Ocorreu um erro!");
       }
     }
 
@@ -63,9 +63,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
             navigate("/dashboard");
 
-          } catch (error: any) {
-            console.log(error)
-            toast.error(error.message);
+          } catch (error) {
+            toast.error("Ocorreu um erro!");
 
           } finally {
             setLoading(false);

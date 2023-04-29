@@ -68,7 +68,6 @@ export const StyledFormRegister = styled.form`
 
     @media (min-width: 769px) {
         width: 463px;
-        height: 645px;
         label {
                 font-size: 20px;
             }

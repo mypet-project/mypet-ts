@@ -8,6 +8,7 @@ import { ILogin, UserContext } from "../../providers/UserContext";
 import CloudBackground from "../../assets/CloudBackground.jpg";
 import PetImage from "../../assets/PetImage.jpg";
 import { Link } from "react-router-dom";
+import { InputForm } from "../../components/InputLogin/index";
 
 export function LoginPage() {
   const {
@@ -46,20 +47,10 @@ export function LoginPage() {
 
               <div className="form__container">
                 <form onSubmit={handleSubmit(submit)} className="login__form">
-                  <label>E-Mail</label>
-                  <input
-                    type="email"
-                    placeholder="Digite seu e-mail..."
-                    {...register("email")}
-                  />
+                  <InputForm label="E-mail" id="email" type="email" register={register("email")} placeholder="Digite seu e-mail..."/>
                   {errors.email ? <p>{errors.email.message}</p> : null}
 
-                  <label>Senha</label>
-                  <input
-                    type="password"
-                    placeholder="Digite sua senha..."
-                    {...register("password")}
-                  />
+                  <InputForm label="Senha" id="password" type="password" register={register("password")} placeholder="Digite sua senha..."/>
                   {errors.password ? <p>{errors.password.message}</p> : null}
 
                   <button type="submit">Login</button>

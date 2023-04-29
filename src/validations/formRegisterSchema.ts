@@ -9,15 +9,15 @@ export const formRegisterSchema = z.object({
     password: z
       .string()
       .min(8, "A senha é obrigatoria e precisa de no minimo 8 caracteres")
-      .regex(/(?=.*?[A-Z])/, "é necessario ao menos uma letra maiuscula")
-      .regex(/(?=.*?[a-z])/, "é necessario ao menos uma letra minuscula")
-      .regex(/(?=.*?[0-9])/, "é necessario pelo menos um numero")
+      .regex(/(?=.*?[A-Z])/, "É necessario ao menos uma letra maiuscula")
+      .regex(/(?=.*?[a-z])/, "É necessario ao menos uma letra minuscula")
+      .regex(/(?=.*?[0-9])/, "É necessario pelo menos um numero")
       .regex(
         /(?=.*?[#?!@$%^&*-])/,
         "é necessario pelo menos um caracter especial"
       ),
-    confirmPassword: z.string().min(1, "confirmar a senha é obrigatoria"),
-    birthData: z.string().min(8, "a data de nascimento é obrigatoria")
+    confirmPassword: z.string().min(1, "Confirmar a senha é obrigatoria"),
+    birthDate: z.string().min(8, "A data de nascimento é obrigatoria")
 }).refine(({ password, confirmPassword }) => confirmPassword === password, {
     message: "A confirmação e a senha precisam ser iguais",
     path: ["confirmPassword"],
