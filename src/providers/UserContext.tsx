@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-import { AxiosError } from "axios";
 
 interface IUserProviderProps {
   children: React.ReactNode;
@@ -25,6 +24,7 @@ export interface IUser{
    email: string;
    name: string;
    birthDate: string;
+   id: number;
 }
 
 
@@ -54,23 +54,24 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         setTimeout(() => {
           navigate("/");
         }, 2500);
-      } catch (error) {
-        toast.error("Ocorreu um erro!");
+      } catch (error: any) {
+        
+        console.log(error)
+        toast.error(error.response.data);
+        //toast.error("Ocorreu um erro!");
       }
     }
 
     async function submitLogin (formData: ILogin) {
-      console.log(formData)
         try {
             setLoading(true);
-            const response = await api.post("login", formData);
-            toast.success("Login feito com sucesso!");
-
+            const response = await api.post("/login", formData);
             const { user: userResponse, accessToken: token } = response.data;
             setUser(userResponse);
+            toast.success("Login feito com sucesso!");
             localStorage.setItem("@mypet:token", JSON.stringify(token));
-            localStorage.setItem("@mypedt:userId", JSON.stringify(userResponse.id))
-            api.defaults.headers.common.authoriztion = `Bearer ${token}`
+            localStorage.setItem("@mypet:userId", JSON.stringify(userResponse.id))
+            api.defaults.headers.common.authorization = `Bearer ${token}`
             navigate("/dashboard");
           } catch (error) {
             toast.error("Ocorreu um erro!");
@@ -80,41 +81,41 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     }
 
     useEffect(()=>{
-      const token = localStorage.getItem("@mypet:token");
-      const userId = localStorage.getItem("@mypet:userId");
-
-      const userAutoLogin = async () =>{
+      async function userAutologin(){
         try{
+          const sToken = localStorage.getItem("@mypet:token");
+          const sUserId = localStorage.getItem("@mypet:userId");
+          const token = sToken && JSON.parse(sToken)
+          const userId =  sUserId && JSON.parse(sUserId)
           setLoading(true);
-          api.defaults.headers.common.authoriztion = `Bearer ${token}`;
-          const {data} = await api.get<IUser>(`users/${userId}`)
-          console.log()
-          setUser(data)
-          navigate("dashboard")
+          api.defaults.headers.common.authorization = `Bearer ${token}`;
+          if(token && userId){
+            const {data} = await api.get<IUser>(`/users/${userId}`)
+            setUser(data)
+            navigate("dashboard")
+          }else{
+            throw new Error();
+          }
+
         }catch(error){
-          localStorage.removeItem("@mypet:token");
-          localStorage.removeItem("@mypet:userId");
+          logout();
         }finally{
           setLoading(false);
         }
       }
-
-      if(token && userId){
-        userAutoLogin();
-      }
+      userAutologin()
     }, [])
 
     function logout(){
       localStorage.removeItem("@mypet:token");
-      localStorage.removeItem("@mypedt:userId");
+      localStorage.removeItem("@mypet:userId");
       setUser(null);
       navigate("/")
     }
 
   return (
     <UserContext.Provider
-      value={{ submitRegister, submitLogin, logout, user}}
-    >
+      value={{ submitRegister, submitLogin, logout, user}}>
       {children}
     </UserContext.Provider>
   );
