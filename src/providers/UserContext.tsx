@@ -117,7 +117,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
               Authorization: `Bearer ${token}`,
             }
           });
-          console.log(data)
           setProfile(data)
         } catch (error: any) {
           toast.error(error.message);
@@ -125,8 +124,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       };
       getProfile();
     }, []);
-
-
 
     function logout(){
       localStorage.removeItem("@mypet:token");
