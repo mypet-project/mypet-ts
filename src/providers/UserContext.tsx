@@ -33,7 +33,7 @@ interface IUserContext {
     formaRegisterData: ISubmitRegisterParameter
   ) => Promise<void>;
     submitLogin: (loginData: ILogin) => void;
-    /* logout: () => void; */
+    logout: () => void;
     user: IUser | null | undefined;
 }
 
@@ -104,16 +104,16 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       }
     }, [])
 
-/*     function logout(){
+    function logout(){
       localStorage.removeItem("@mypet:token");
       localStorage.removeItem("@mypedt:userId");
       setUser(null);
       navigate("/")
-    } */
+    }
 
   return (
     <UserContext.Provider
-      value={{ submitRegister, submitLogin, /* logout,*/ user}}
+      value={{ submitRegister, submitLogin, logout, user}}
     >
       {children}
     </UserContext.Provider>
