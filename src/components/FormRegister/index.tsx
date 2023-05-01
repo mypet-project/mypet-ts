@@ -38,7 +38,7 @@ export const FormRegister = () => {
           register={register("email")}       />
           {errors.email ? <p>{errors.email.message}</p> : null}
         <InputFormRegister
-          date={0} placeholder="Digite sua senha..."
+          placeholder="Digite sua senha..."
           label="Senha"
           type="password"
           id="senha"

@@ -23,10 +23,9 @@ export interface ILogin {
 export interface IUser{
    email: string;
    name: string;
-   birthDate: string;
+   birthDate: number;
    id: number;
 }
-
 
 interface IUserContext {
   submitRegister: (
@@ -35,12 +34,15 @@ interface IUserContext {
     submitLogin: (loginData: ILogin) => void;
     logout: () => void;
     user: IUser | null | undefined;
+    profile: IUser | null | undefined;
 }
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
     const [user, setUser] = useState<IUser | null | undefined>(null)
+
+    const [profile, setProfile] = useState<IUser | null | undefined>(null)
 
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -58,7 +60,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         
         console.log(error)
         toast.error(error.response.data);
-        //toast.error("Ocorreu um erro!");
       }
     }
 
@@ -106,6 +107,27 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       userAutologin()
     }, [])
 
+    useEffect(() => {
+      async function getProfile () {
+        const token = JSON.parse(localStorage.getItem("@mypet:token") as string);
+        const userId = JSON.parse(localStorage.getItem("@mypet:userId")as string);
+        try {
+          const { data } = await api.get(`users/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          });
+          console.log(data)
+          setProfile(data)
+        } catch (error: any) {
+          toast.error(error.message);
+        }
+      };
+      getProfile();
+    }, []);
+
+
+
     function logout(){
       localStorage.removeItem("@mypet:token");
       localStorage.removeItem("@mypet:userId");
@@ -115,7 +137,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   return (
     <UserContext.Provider
-      value={{ submitRegister, submitLogin, logout, user}}>
+      value={{ submitRegister, submitLogin, logout, user, profile}}>
       {children}
     </UserContext.Provider>
   );
