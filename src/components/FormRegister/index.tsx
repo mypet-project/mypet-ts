@@ -28,36 +28,41 @@ export const FormRegister = () => {
           type="text"
           id="nome"
           register={register("name")}
+          errors={errors.name?.message}
              />
-             {errors.name ? <p>{errors.name.message}</p> : null}
         <InputFormRegister
           placeholder="Digite o seu e-mail..."
           label="E-mail"
           type="email"
           id="e-mail"
-          register={register("email")}       />
-          {errors.email ? <p>{errors.email.message}</p> : null}
+          register={register("email")}       
+          errors={errors.email?.message}
+          />
         <InputFormRegister
-          date={0} placeholder="Digite sua senha..."
+          placeholder="Digite sua senha..."
           label="Senha"
           type="password"
           id="senha"
-          register={register("password")}       />
-          {errors.password ? <p>{errors.password.message}</p> : null}
+          register={register("password")}       
+          errors={errors.password?.message}
+          />
         <InputFormRegister
           placeholder="Confirme sua senha..."
           label="Confime sua senha"
           type="password"
           id="confirmaSenha"
-          register={register("confirmPassword")}        />
-          {errors.confirmPassword ? <p>{errors.confirmPassword.message}</p> : null}
+          register={register("confirmPassword")}        
+          errors={errors.confirmPassword?.message}
+          />
         <InputFormRegister
           placeholder="dd/mm/aa."
           label="Data de Nascimento"
           type="date"
           id="dataNascimento"
-          register={register("birthDate")}        />
-          {errors.birthDate ? <p>{errors.birthDate.message}</p> : null}
+          register={register("birthDate")}        
+          errors={errors.birthDate?.message}
+          />
+          
       </div>
 
       <div className="container__buttons">

@@ -6,6 +6,7 @@ export const Header = styled.header`
     border-radius: 0rem 0rem 0.625rem 0.625rem;
     background-color: var(--primary-color);
     height: 4.475rem;
+    z-index: 100;
 
     .header__limit {
         width: 100%;

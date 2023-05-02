@@ -72,7 +72,8 @@ body {
 	line-height: 1;
     display: block;
     background-color: var(--white);
-	width: 99vw;
+	width: 100%;
+	height: 100vh;
 }
 ol, ul {
 	list-style: none;

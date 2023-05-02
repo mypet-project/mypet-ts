@@ -92,7 +92,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           if(token && userId){
             const {data} = await api.get<IUser>(`/users/${userId}`)
             setUser(data)
-            navigate("dashboard")
+            navigate("/dashboard")
           }else{
             throw new Error();
           }
