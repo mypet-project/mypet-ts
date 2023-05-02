@@ -7,14 +7,18 @@ interface IInputProps {
     register: UseFormRegisterReturn<string>;
     label: string;
     placeholder: string;
+    errors?: string ;
   }
 
-export function InputFormRegister ({ label, type, id, register, placeholder }: IInputProps) {
+export function InputFormRegister ({ errors, label, type, id, register, placeholder }: IInputProps) {
 
         return(
             <StyledInput>
-                {label ? <label htmlFor={id}>{label}</label> : null}
-                <input type={type} id={id} {...register} placeholder={placeholder}/>
+                <div className="divInput">
+                    {label ? <label htmlFor={id}>{label}</label> : null}
+                    <input type={type} id={id} {...register} placeholder={placeholder}/>
+                    <span>{errors}</span>
+                </div>
             </StyledInput>
         );
     };

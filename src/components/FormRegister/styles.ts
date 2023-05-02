@@ -2,16 +2,29 @@ import styled from "styled-components";
 
 export const StyledFormRegister = styled.form`
     width: 100%;
-    height: fit-content;
+   /*  height: fit-content; */
     display: flex;
     flex-direction: column;
     background-color: var(--white);
     border-radius: 22px;
-    padding: 23px 20px;
+    padding: 23px 34px;
 
+    .container__inputs{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
     label {
         font-size: 1rem;
         color: var(--black);
+    }
+
+    span{
+        color: red;
+        position: absolute;
+        left: 0px;
+        bottom: 1px;
+        z-index: 99;
     }
 
     input {
@@ -20,12 +33,11 @@ export const StyledFormRegister = styled.form`
         height: 2.188rem;
         border-radius: 0.313rem;
         padding: 0.5rem;
-        margin-bottom: 0.3rem;
-
         ::placeholder {
             color: var(--tertiary-gray);
         }
     }
+
     
     .container__buttons {
         display: flex;
