@@ -1,12 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito&display=swap'); */
+//comentarios dentro de template string ainda sao lidos normalmente (só ñ é executado) pelas verificações do stiled components, nisso dispara WARN (q serve para avisar para nao usar algo)
+
 export const GlobalStyle = createGlobalStyle`
     /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito&display=swap');
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -26,7 +28,7 @@ time, mark, audio, video, button, input, textarea, select {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-family: Inter, system-ui, /* Avenir, */ Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
 	vertical-align: baseline;
@@ -71,7 +73,8 @@ body {
 	line-height: 1;
     display: block;
     background-color: var(--white);
-	width: 99vw;
+	width: 100%;
+	height: 100vh;
 }
 ol, ul {
 	list-style: none;

@@ -23,9 +23,10 @@ export interface ILogin {
 export interface IUser{
    email: string;
    name: string;
-   birthDate: number;
+   birthDate: string;
    id: number;
 }
+
 
 interface IUserContext {
   submitRegister: (
@@ -35,6 +36,7 @@ interface IUserContext {
     logout: () => void;
     user: IUser | null | undefined;
     profile: IUser | null | undefined;
+
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -57,8 +59,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           navigate("/");
         }, 2500);
       } catch (error: any) {
-        
-        console.log(error)
         toast.error(error.response.data);
       }
     }
@@ -93,7 +93,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           if(token && userId){
             const {data} = await api.get<IUser>(`/users/${userId}`)
             setUser(data)
-            navigate("dashboard")
+            navigate("/dashboard")
           }else{
             throw new Error();
           }
@@ -106,7 +106,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       }
       userAutologin()
     }, [])
-
     useEffect(() => {
       async function getProfile () {
         const token = JSON.parse(localStorage.getItem("@mypet:token") as string);
@@ -134,6 +133,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   return (
     <UserContext.Provider
       value={{ submitRegister, submitLogin, logout, user, profile}}>
+
       {children}
     </UserContext.Provider>
   );

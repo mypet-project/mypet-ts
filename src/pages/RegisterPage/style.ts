@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const StyledRegisterPage = styled.main`
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: var(--white);
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2rem;
+    position: relative;
+    top: 22px;
 
     .round__one {
         display: none;
@@ -19,36 +20,34 @@ export const StyledRegisterPage = styled.main`
     
     .pink__div {
         width: 100%;
-        height: 100%;
         background-color: rgba(var(--primary-rgba), 0.5);
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 26px 0;
     }
-
+    .cloud__section {
+        margin-top: 8rem;
+        width: 100%;
+        height: 88%;
+    }
     section {
         margin-top: 8rem;
-        height: 100%;
         width: 100%;
-        background-color: lightpink;
-        display: flex;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        
+
 
         .container__formregister{
             width: 84%;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center;            
         }
     }
-
-    .credits {
-        font-size: 0.75rem;
-        margin: 1rem;
-    }
-
     @media (min-width: 769px) {
         margin-bottom: 0;
 
@@ -59,7 +58,7 @@ export const StyledRegisterPage = styled.main`
             height: 66px;
             background-color: var(--primary-green);
             border-radius: 100%;
-            top: 120px;
+            top: 98px;
             right: 100px;
         }
 
@@ -70,7 +69,7 @@ export const StyledRegisterPage = styled.main`
             height: 109px;
             background-color: var(--secondary-green);
             border-radius: 100%;
-            top: 770px;
+            top: 885px;
             left: 100px;
         }
 
