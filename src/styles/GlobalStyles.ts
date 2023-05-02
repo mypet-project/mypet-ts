@@ -58,6 +58,7 @@ time, mark, audio, video, button, input, textarea, select {
 
 		--white: #FFFFFF;
 		--black: #000000;
+		--primary-black: 0, 0, 0;
     }
 
 	

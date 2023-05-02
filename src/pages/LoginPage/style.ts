@@ -50,7 +50,7 @@ export const Main = styled.main`
         padding: 2rem;
         align-items: center;
         justify-content: space-between;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px;
+        box-shadow: rgba(var(--primary-black), 0.25) 0rem 0.25rem 0.25;
     }
 
     .register__button {
@@ -157,7 +157,7 @@ export const Main = styled.main`
             flex-direction: column;
             justify-content: space-between;
             background-color: var(--primary-color);
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            box-shadow: 0px 4px 4px rgba(var(--primary-black), 0.25);
             border-radius: 22px;
             padding: 40px 30px;
 
