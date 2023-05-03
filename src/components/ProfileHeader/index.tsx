@@ -9,6 +9,8 @@ import { Header } from "./styled";
 
 export function ProfileHeader() {
   const { profile, logout } = useContext(UserContext);
+
+
   return (
     <Header>
       <section className="header__limit">
@@ -22,9 +24,9 @@ export function ProfileHeader() {
           <Link className="btn__home" to={"/dashboard"}>
             Home
           </Link>
-          <button className="btn__exit" onClick={() => logout()}>
+          <Link className="btn__exit" onClick={() => logout()} to={"/"}>
             Sair
-          </button>
+          </Link>
         </div>
         <img className="user__circle" src={UserCircle}></img>
       </div>
