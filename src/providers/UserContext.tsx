@@ -50,10 +50,17 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
     const navigate = useNavigate()
 
+
     async function submitRegister(formaRegisterData: ISubmitRegisterParameter) {
-      delete formaRegisterData.confirmPassword;
+      const newForm = {
+        img: "https://cdn.icon-icons.com/icons2/472/PNG/48/user_male_circle-48_45856.png",
+        birthDate: formaRegisterData.birthDate,
+        email: formaRegisterData.email,
+        password: formaRegisterData.password,
+        name: formaRegisterData.name
+      }
       try {
-        const response = await api.post("/register", formaRegisterData);
+        const response = await api.post("/register", newForm);
         toast.success("Conta criada com sucesso!");
         setTimeout(() => {
           navigate("/");
@@ -119,7 +126,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           });
           setProfile(data)
         } catch (error: any) {
-          toast.error(error.message);
         }
       };
       getProfile();
