@@ -125,6 +125,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       getProfile();
     }, []);
 
+
     function logout() {
       localStorage.removeItem("@mypet:token");
       localStorage.removeItem("@mypet:userId");
