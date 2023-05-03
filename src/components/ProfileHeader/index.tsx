@@ -16,8 +16,8 @@ export function ProfileHeader() {
           <img src={MyPetLogo} className="mpet__logo" />
           <img src={MyPet} className="mpet__title" />
         </div>
-      </section>
-      <section className="btn__img__header__profile">
+
+        <div className="btn__img__header__profile">
         <div className="btn__header__profile">
           <Link className="btn__home" to={"/dashboard"}>
             Home
@@ -27,6 +27,8 @@ export function ProfileHeader() {
           </button>
         </div>
         <img className="user__circle" src={UserCircle}></img>
+      </div>
+      
       </section>
     </Header>
   );
