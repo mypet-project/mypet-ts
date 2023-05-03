@@ -77,7 +77,7 @@ export function PetModal() {
               <button
               className="remove__button"
               onClick={() => {
-                deletePet(petData?.id as number), closeCardModal();
+                deletePet(petData?.id as number)
               }}
             >
               Remover

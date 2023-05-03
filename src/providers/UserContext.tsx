@@ -35,6 +35,7 @@ interface IUserContext {
   logout: () => void;
   user: IUser | null | undefined;
   profile: IUser | null | undefined;
+  getProfile: () => Promise<void>
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -110,21 +111,22 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     userAutologin();
   }, []);
 
+  async function getProfile() {
+    const token = JSON.parse(localStorage.getItem('@mypet:token') as string);
+    const userId = JSON.parse(
+      localStorage.getItem('@mypet:userId') as string
+    );
+    try {
+      const { data } = await api.get(`users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProfile(data);
+    } catch (error: any) {}
+  }
+
   useEffect(() => {
-    async function getProfile() {
-      const token = JSON.parse(localStorage.getItem('@mypet:token') as string);
-      const userId = JSON.parse(
-        localStorage.getItem('@mypet:userId') as string
-      );
-      try {
-        const { data } = await api.get(`users/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setProfile(data);
-      } catch (error: any) {}
-    }
     getProfile();
   }, []);
 
@@ -136,7 +138,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   return (
     <UserContext.Provider
-      value={{ submitRegister, submitLogin, logout, user, profile }}
+      value={{ submitRegister, submitLogin, logout, user, profile, getProfile }}
     >
       {children}
     </UserContext.Provider>
