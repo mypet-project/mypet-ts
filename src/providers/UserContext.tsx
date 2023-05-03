@@ -35,12 +35,16 @@ interface IUserContext {
     submitLogin: (loginData: ILogin) => void;
     logout: () => void;
     user: IUser | null | undefined;
+    profile: IUser | null | undefined;
+
 }
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
     const [user, setUser] = useState<IUser | null | undefined>(null)
+
+    const [profile, setProfile] = useState<IUser | null | undefined>(null)
 
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -55,10 +59,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           navigate("/");
         }, 2500);
       } catch (error: any) {
-        
-        console.log(error)
         toast.error(error.response.data);
-        //toast.error("Ocorreu um erro!");
       }
     }
 
@@ -106,16 +107,34 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       userAutologin()
     }, [])
 
-    function logout(){
+    useEffect(() => {
+      async function getProfile () {
+        const token = JSON.parse(localStorage.getItem("@mypet:token") as string);
+        const userId = JSON.parse(localStorage.getItem("@mypet:userId")as string);
+        try {
+          const { data } = await api.get(`users/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          });
+          setProfile(data)
+        } catch (error: any) {
+          toast.error(error.message);
+        }
+      };
+      getProfile();
+    }, []);
+
+    function logout() {
       localStorage.removeItem("@mypet:token");
       localStorage.removeItem("@mypet:userId");
       setUser(null);
-      navigate("/")
     }
 
   return (
     <UserContext.Provider
-      value={{ submitRegister, submitLogin, logout, user}}>
+      value={{ submitRegister, submitLogin, logout, user, profile}}>
+
       {children}
     </UserContext.Provider>
   );

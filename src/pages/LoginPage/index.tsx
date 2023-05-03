@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { ILogin, UserContext } from "../../providers/UserContext";
 import CloudBackground from "../../assets/CloudBackground.jpg";
 import PetImage from "../../assets/PetImage.jpg";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { InputForm } from "../../components/InputLogin/index";
 
 export function LoginPage() {
@@ -23,6 +23,12 @@ export function LoginPage() {
 
   function submit(formData: ILogin) {
     submitLogin(formData);
+  }
+
+  const token = JSON.parse(localStorage.getItem("@mypet:token") as string)
+
+  if (token) {
+    return <Navigate to="/dashboard" />;
   }
 
   return (

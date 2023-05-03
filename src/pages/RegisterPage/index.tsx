@@ -3,8 +3,15 @@ import { RegisterHeader } from "../../components/RegisterHeader";
 import { StyledRegisterPage } from "./style";
 import CloudBackground from "../../assets/CloudBackground.jpg";
 import { Footer } from "../../components/Footer";
+import { Navigate } from "react-router-dom";
 
 export function RegisterPage() {
+  const token = JSON.parse(localStorage.getItem("@mypet:token") as string)
+
+  if (token) {
+    return <Navigate to="/dashboard" />;
+  }
+  
   return (
     <>
       <RegisterHeader />

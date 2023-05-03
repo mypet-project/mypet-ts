@@ -1,58 +1,51 @@
 import { useContext, useEffect } from "react";
-
-import { isAxiosError } from "axios";
-import { api } from "../../services/api";
-
+import { CreateCardModal } from "../../components/CreateCardModal";
+import { DashboardHeader } from "../../components/DashboardHeader";
+import { PetCard } from "../../components/PetCard";
+import { PetModal } from "../../components/PetModal";
 import { PetContext } from "../../providers/PetContext";
-import { PetCard } from "../../components/PetList/PetCard";
+import { StyledDashboardPage } from "./style";
 
-export const DashboardPage = () => {
-  const { fundraisingPet, setFundraisingPet, pets } = useContext(PetContext);
+export function DashboardPage() {
+  const { pets, petCardModal, createCardModal, setCreateCardModal, getPets } = useContext(PetContext);
+
+  function openModal() {
+    setCreateCardModal(true)
+  }
 
   useEffect(() => {
-    async function getListPetsService() {
-      try {
-        const token = localStorage.getItem("@TOKEN");
-        const userId = localStorage.getItem("@UserId");
-
-        const response = await api.get(`/pets`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            userId: userId,
-          },
-        });
-        console.log(fundraisingPet);
-        setFundraisingPet(response.data);
-      } catch (error) {
-        if (isAxiosError(error)) {
-          console.log(error.message);
-        }
-        console.log(error);
-      }
-    }
-    getListPetsService();
-  }, []);
+    getPets();
+}, [pets])
 
   return (
     <>
-      <div>
-        <h1>Pets do Mundo todo ao seu Alcance !</h1>
-      </div>
-      <div>
-        <button>+</button>
-      </div>
-      <hr />
-      <main>
-        <ul>
-          {fundraisingPet.length == 0 ? (
-            <h2>Nenhum Pet encontrado</h2>
-          ) : (
-            fundraisingPet.map((pets) => {
-              return <PetCard key={pets.id} pets={pets} />;
-            })
-          )}
-        </ul>
-      </main>
+      {petCardModal === true ? <PetModal /> : null}
+      <DashboardHeader />
+      <StyledDashboardPage>
+      {createCardModal === true ? <CreateCardModal /> : null}
+        <main className="main__page">
+          <section className="title__section">
+            <div className="pet__title__div">
+              <h1 className="dashboard__title">
+                Pets do mundo todo ao seu alcance!
+              </h1>
+            </div>
+            <button className="add__button" onClick={() => {openModal()}}>+</button>
+            <div className="divider__box"></div>
+          </section>
+          <section className="cards__section">
+            <ul>
+              {pets.length == 0 ? (
+                <h2>Nenhum Pet encontrado.</h2>
+              ) : (
+                pets.map((pet) => {
+                  return <PetCard key={pet.id} pets={pet} />;
+                })
+              )}
+            </ul>
+          </section>
+        </main>
+      </StyledDashboardPage>
     </>
   );
-};
+}
