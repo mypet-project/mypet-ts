@@ -134,6 +134,10 @@ export const Header = styled.header`
         justify-content: center;
         align-items: center;
 
+        :hover {
+            background-color: var(--secondary-green);
+        }
+
         img {
             width: 1.688rem;
             height: 1.688rem;

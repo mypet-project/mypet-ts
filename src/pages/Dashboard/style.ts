@@ -36,6 +36,10 @@ export const StyledDashboardPage = styled.div`
     font-weight: 600;
     font-size: 1.688rem;
     padding-bottom: 0.3rem;
+
+    :hover {
+            background-color: var(--secondary-green);
+        }
     }
 
     .divider__box {

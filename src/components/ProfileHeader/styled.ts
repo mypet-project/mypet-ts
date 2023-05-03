@@ -39,7 +39,7 @@ export const Header = styled.header`
   }
 
   .btn__home {
-    background: white;
+    background-color: var(--white);
     text-decoration: none;
     border-radius: 0.188rem;
     cursor: pointer;
@@ -48,10 +48,16 @@ export const Header = styled.header`
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--black);
+
+    :hover {
+      background-color: var(--black);
+      color: var(--white);
+    }
   }
 
   .btn__exit {
-    background: white;
+    background-color: var(--white);
     border-radius: 0.188rem;
     cursor: pointer;
     width: 4.75rem;
@@ -59,6 +65,12 @@ export const Header = styled.header`
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--black);
+
+    :hover {
+      background-color: var(--black);
+      color: var(--white);
+    }
   }
   .user__circle {
         width: 2.938rem;

@@ -95,10 +95,18 @@ export const PetModalCard = styled.div`
         font-weight: 700;
         font-size: 0.75rem;
         border-radius: 0.25rem;
+
+        :hover {
+            background-color: var(--secondary-red)
+        }
     }
 
     .edit__button {
         background-color: var(--secondary-green);
+
+        :hover {
+            background-color: var(--tertiary-green)
+        }
     }
 
     @media (min-width: 769px) {
