@@ -66,6 +66,7 @@ export const Header = styled.header`
     align-items: center;
     justify-content: center;
     color: var(--black);
+    text-decoration: none;
 
     :hover {
       background-color: var(--black);
