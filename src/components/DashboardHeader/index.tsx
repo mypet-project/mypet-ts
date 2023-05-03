@@ -4,12 +4,16 @@ import UserCircle from "../../assets/UserCircle.png";
 import SearchIcon from "../../assets/SearchIcon.png";
 import { Header } from "./style";
 import { UserIconModal } from "../UserIconModal";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PetContext } from "../../providers/PetContext";
 
+interface IDashboardHeaderProps{
+    filterProductList: (valueInput: string)=> void
+}
 
-export function DashboardHeader() {
+export function DashboardHeader({filterProductList}: IDashboardHeaderProps) {
     const [openUserModal, setOpenUserModal] = useState<boolean>(false)
-
+    const { setValueInput, valueInput} = useContext(PetContext)
     function openCloseModal() {
         setOpenUserModal(!openUserModal)
     }
@@ -23,8 +27,11 @@ export function DashboardHeader() {
                     <img src={MyPet} className="mpet__title" />
                 </div>
                 <div className="input__div">
-                    <input type="text" placeholder="Pesquise!"/>
-                    <div className="search__button"><img src={SearchIcon} className="search__icon" /></div>
+                    <input type="text" placeholder="Pesquise!" value={valueInput} onChange={(e)=>{
+                        e.preventDefault();
+                        setValueInput(e.target.value)
+                    }} />
+                    <div className="search__button"><img src={SearchIcon} className="search__icon" onClick={()=> filterProductList(valueInput)}/></div>
 
                     <div className="profile__div" onClick={() => {openCloseModal()}}>
                     <div className="user__circle">

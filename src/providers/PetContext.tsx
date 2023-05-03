@@ -34,19 +34,26 @@ export interface IPetContext {
   setCreateCardModal: React.Dispatch<React.SetStateAction<boolean>>
   registerPet: (registerPetData: IRegisterPet, profileId: number | undefined) => Promise<void>
   deletePet: (cardId: number) => Promise<void>
-  getPets: () => Promise<void>
+  getPets: () => Promise<void>,
+  valueInput: string, 
+  setValueInput: React.Dispatch<React.SetStateAction<string>>,
+  setNewProductList: React.Dispatch<React.SetStateAction<IPetData[]>>,
+  newProductList: IPetData[]
 }
 
 export const PetContext = createContext({} as IPetContext);
 
 export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
   const [pets, setPets] = useState<IPetData[]>([]);
+  const [newProductList, setNewProductList] = useState<IPetData[]>([]);
+  const [valueInput, setValueInput] = useState("");
 
   const [petData, setPetData] = useState<IPetData | null>(null)
 
   const [petCardModal, setPetCardModal] = useState<boolean>(false)
 
   const [createCardModal, setCreateCardModal] = useState<boolean>(false)
+
 
   async function getPets() {
     try {
@@ -110,7 +117,11 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
         setCreateCardModal,
         registerPet,
         deletePet,
-        getPets
+        getPets,
+        valueInput,
+        setValueInput,
+        setNewProductList,
+        newProductList
       }}
     >
       {children}
