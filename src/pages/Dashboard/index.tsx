@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CreateCardModal } from "../../components/CreateCardModal";
 import { DashboardHeader } from "../../components/DashboardHeader";
 import { PetCard } from "../../components/PetCard";
@@ -7,7 +7,9 @@ import { PetContext } from "../../providers/PetContext";
 import { StyledDashboardPage } from "./style";
 
 export function DashboardPage() {
-  const { pets, petCardModal, createCardModal, setCreateCardModal, getPets } = useContext(PetContext);
+  const [emptyStatus, setEmptyStatus] = useState<boolean>(false)
+
+  const { pets, petCardModal, createCardModal, setCreateCardModal, getPets, valueInput, setNewProductList, newProductList } = useContext(PetContext);
 
   function openModal() {
     setCreateCardModal(true)
@@ -17,10 +19,22 @@ export function DashboardPage() {
     getPets();
 }, [pets])
 
+function filterProductList(valueInput: string){
+    const newList = pets.filter(
+      (itemPet) => itemPet.name.toLowerCase().includes(valueInput.toLowerCase().trim().normalize()) 
+    );
+    if(newList.length == 0 && valueInput != null ){
+      setEmptyStatus(true)
+    }else{
+      setEmptyStatus(false)
+    setNewProductList(newList)
+    }
+}
+
   return (
     <>
       {petCardModal === true ? <PetModal /> : null}
-      <DashboardHeader />
+      <DashboardHeader filterProductList={filterProductList}/>
       <StyledDashboardPage>
       {createCardModal === true ? <CreateCardModal /> : null}
         <main className="main__page">
@@ -35,13 +49,17 @@ export function DashboardPage() {
           </section>
           <section className="cards__section">
             <ul>
-              {pets.length == 0 ? (
-                <h2>Nenhum Pet encontrado.</h2>
-              ) : (
-                pets.map((pet) => {
-                  return <PetCard key={pet.id} pets={pet} />;
-                })
-              )}
+              {emptyStatus == true ? <p>Pet não encontrado</p> : 
+                newProductList.length == 0 ? (
+                  pets.map((pet) => {
+                    return <PetCard key={pet.id} pets={pet} />;
+                  })
+                ) : (
+                  newProductList.map((pet) => {
+                    return <PetCard key={pet.id} pets={pet} />;
+                  })
+                )
+              }
             </ul>
           </section>
         </main>
