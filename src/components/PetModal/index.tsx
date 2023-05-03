@@ -73,7 +73,8 @@ export function PetModal() {
             {petData?.userId === profile?.id ? (
               <button className="edit__button" type="submit">Editar</button>
             ) : null}
-            <button
+            {petData?.userId === profile?.id ? (
+              <button
               className="remove__button"
               onClick={() => {
                 deletePet(petData?.id as number), closeCardModal();
@@ -81,6 +82,8 @@ export function PetModal() {
             >
               Remover
             </button>
+            ) : null}
+            
           </div>
         </form>
       </div>
