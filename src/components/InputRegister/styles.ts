@@ -4,25 +4,25 @@ export const StyledInput = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    /* background-color: black; */
 
-
-    .divInput{
-      /* background-color: blue; */
-      position: relative;
-      height: 105px;
+    .div__input{
+      height: 4rem;
     }
 
-    /* p {
-        color: red;
-        font-size: 0.6106rem;
-        margin: 0;
-    } */
-
-    @media (min-width: 1024px) {
+    @media (min-width: 769px) and (min-height: 734px) {
     
     p {
       font-size: 0.7612rem;
+    }
+
+    .div__input{
+      height: 80px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-height: 733px) {
+    .div__input{
+      height: 60px;
     }
   }
 
