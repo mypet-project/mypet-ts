@@ -106,6 +106,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       }
       userAutologin()
     }, [])
+
     useEffect(() => {
       async function getProfile () {
         const token = JSON.parse(localStorage.getItem("@mypet:token") as string);

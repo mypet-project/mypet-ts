@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import MyPet from "../../assets/MyPet.svg";
 import MyPetLogo from "../../assets/MyPetLogo.svg";
 import UserCircle from "../../assets/UserCircle.png";

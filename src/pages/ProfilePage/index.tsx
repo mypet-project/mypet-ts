@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { Header } from "../../components/RegisterHeader/style"
 import MyPet from "../../assets/MyPet.svg";
 import MyPetLogo from "../../assets/MyPetLogo.svg";
+import UserCircle from "../../assets/UserCircle.png";
 
 export function ProfilePage() {
     const { profile, logout } = useContext(UserContext)
@@ -16,10 +17,10 @@ export function ProfilePage() {
                         <img src={MyPet} className="mpet__title" />
                     </div>
                 </section>
-                <img src="https://cdn.icon-icons.com/icons2/472/PNG/48/user_male_circle-48_45856.png"></img>
+                <img src={UserCircle}></img>
             </Header>
             <div>
-                <img src="https://cdn.icon-icons.com/icons2/472/PNG/48/user_male_circle-48_45856.png"></img>
+                <img src={UserCircle}></img>
                 <h1>{profile?.name}</h1>
                 <p>{profile?.birthDate}<span></span></p>
                 <p>{profile?.email}<span></span></p>

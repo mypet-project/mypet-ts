@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const StyledFormRegister = styled.form`
     width: 100%;
-   /*  height: fit-content; */
     display: flex;
     flex-direction: column;
     background-color: var(--white);
