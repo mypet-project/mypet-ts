@@ -60,7 +60,6 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
 
   const [createCardModal, setCreateCardModal] = useState<boolean>(false)
 
-
   async function getPets() {
     try {
       const token = localStorage.getItem("@mypet:token");
@@ -104,7 +103,7 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
     try {
       await api.delete(`/pets/${cardId}`)
       toast.success("Deletado com sucesso!")
-      setCreateCardModal(false)
+      setPetCardModal(false)
     } catch (error: any) {
       toast.error(error.message)
     }
@@ -114,7 +113,7 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
     try {
       await api.patch(`/pets/${cardId}`, formData)
       toast.success("Editado com sucesso!")
-      setCreateCardModal(false)
+      setPetCardModal(false)
     } catch (error: any) {
       toast.error(error.message)
     }

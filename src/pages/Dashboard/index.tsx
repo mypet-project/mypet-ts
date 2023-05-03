@@ -4,16 +4,27 @@ import { DashboardHeader } from "../../components/DashboardHeader";
 import { PetCard } from "../../components/PetCard";
 import { PetModal } from "../../components/PetModal";
 import { PetContext } from "../../providers/PetContext";
+import { UserContext } from "../../providers/UserContext";
 import { StyledDashboardPage } from "./style";
 
 export function DashboardPage() {
   const [emptyStatus, setEmptyStatus] = useState<boolean>(false)
 
-  const { pets, petCardModal, createCardModal, setCreateCardModal, getPets, valueInput, setNewProductList, newProductList } = useContext(PetContext);
+  const { getProfile } = useContext(UserContext)
+
+  const { pets, petCardModal, createCardModal, setCreateCardModal, getPets, setNewProductList, newProductList } = useContext(PetContext);
 
   function openModal() {
     setCreateCardModal(true)
   }
+
+  useEffect(() => {
+    getProfile();
+}, [])
+
+  useEffect(() => {
+    getPets();
+}, [])
 
   useEffect(() => {
     getPets();
