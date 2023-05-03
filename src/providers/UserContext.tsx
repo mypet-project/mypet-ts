@@ -38,6 +38,7 @@ interface IUserContext {
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
+
   const [user, setUser] = useState<IUser | null | undefined>(null);
 
   const [profile, setProfile] = useState<IUser | null | undefined>(null);
@@ -104,6 +105,32 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       } finally {
         setLoading(false);
       }
+
+      userAutologin()
+    }, [])
+
+    useEffect(() => {
+      async function getProfile () {
+        const token = JSON.parse(localStorage.getItem("@mypet:token") as string);
+        const userId = JSON.parse(localStorage.getItem("@mypet:userId")as string);
+        try {
+          const { data } = await api.get(`users/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          });
+          setProfile(data)
+        } catch (error: any) {
+        }
+      };
+      getProfile();
+    }, []);
+
+
+    function logout() {
+      localStorage.removeItem("@mypet:token");
+      localStorage.removeItem("@mypet:userId");
+      setUser(null);
     }
     userAutologin();
   }, []);
