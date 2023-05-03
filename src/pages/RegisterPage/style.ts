@@ -20,6 +20,7 @@ export const StyledRegisterPage = styled.main`
     
     .pink__div {
         width: 100%;
+        height: 100%;
         background-color: rgba(var(--primary-rgba), 0.5);
         display: flex;
         justify-content: center;
@@ -69,7 +70,7 @@ export const StyledRegisterPage = styled.main`
             height: 109px;
             background-color: var(--secondary-green);
             border-radius: 100%;
-            top: 885px;
+            top: 920px;
             left: 100px;
         }
 

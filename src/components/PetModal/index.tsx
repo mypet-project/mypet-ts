@@ -6,6 +6,7 @@ import { PetModalCard } from "./style";
 export function PetModal() {
   const { petData, setPetCardModal } = useContext(PetContext);
   const { profile } = useContext(UserContext)
+  
 
   function closeCardModal() {
     setPetCardModal(false);
@@ -34,7 +35,7 @@ export function PetModal() {
         <span className="pet__description">{petData?.description}</span>
 
         <div className="buttons__and__credits">
-          <h2>Por {profile?.name}</h2>
+          {petData?.userId === profile?.id ? <h2>Por {profile?.name}</h2> : <h2>Por Outro Usuário</h2>}
           {petData?.userId === profile?.id ? <button className="remove__button">Remover</button> : null}
           
         </div>
