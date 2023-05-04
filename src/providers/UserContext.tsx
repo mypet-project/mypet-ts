@@ -59,12 +59,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     };
     try {
       const response = await api.post('/register', newForm);
-      toast.success('Conta criada com sucesso!');
+      toast.success('Conta criada com sucesso!', {autoClose: 2000});
       setTimeout(() => {
         navigate('/');
       }, 2500);
     } catch (error: any) {
-      toast.error(error.response.data);
+      toast.error(error.response.data, {autoClose: 2000});
     }
   }
 
@@ -74,13 +74,13 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       const response = await api.post('/login', formData);
       const { user: userResponse, accessToken: token } = response.data;
       setUser(userResponse);
-      toast.success('Login feito com sucesso!');
+      toast.success('Login feito com sucesso!', {autoClose: 2000});
       localStorage.setItem('@mypet:token', JSON.stringify(token));
       localStorage.setItem('@mypet:userId', JSON.stringify(userResponse.id));
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       navigate('/dashboard');
     } catch (error) {
-      toast.error('Ocorreu um erro!');
+      toast.error('Ocorreu um erro!', {autoClose: 2000});
     } finally {
       setLoading(false);
     }
