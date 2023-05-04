@@ -92,30 +92,30 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
       }
     try {
       await api.post("/pets", registerData)
-      toast.success("Post criado com sucesso!")
+      toast.success("Post criado com sucesso!",{autoClose: 2000}) 
       setCreateCardModal(false)
     } catch (error: any) {
-      toast.error(error.message)
+      toast.error(error.message, {autoClose: 2000})
     }
   }
 
   async function deletePet(cardId: number) {
     try {
       await api.delete(`/pets/${cardId}`)
-      toast.success("Deletado com sucesso!")
+      toast.success("Deletado com sucesso!", {autoClose: 2000})
       setPetCardModal(false)
     } catch (error: any) {
-      toast.error(error.message)
+      toast.error(error.message, {autoClose: 2000})
     }
   }
 
   async function editPet(formData: IEditPet, cardId: number | undefined) {
     try {
       await api.patch(`/pets/${cardId}`, formData)
-      toast.success("Editado com sucesso!")
+      toast.success("Editado com sucesso!", {autoClose: 2000})
       setPetCardModal(false)
     } catch (error: any) {
-      toast.error(error.message)
+      toast.error(error.message, {autoClose: 2000})
     }
   }
 

@@ -7,40 +7,55 @@ import { UserIconModal } from "../UserIconModal";
 import { useContext, useState } from "react";
 import { PetContext } from "../../providers/PetContext";
 
-interface IDashboardHeaderProps{
-    filterProductList: (valueInput: string)=> void
+interface IDashboardHeaderProps {
+  filterProductList: (valueInput: string) => void;
 }
 
-export function DashboardHeader({filterProductList}: IDashboardHeaderProps) {
-    const [openUserModal, setOpenUserModal] = useState<boolean>(false)
-    const { setValueInput, valueInput} = useContext(PetContext)
-    function openCloseModal() {
-        setOpenUserModal(!openUserModal)
-    }
+export function DashboardHeader({ filterProductList }: IDashboardHeaderProps) {
+  const [openUserModal, setOpenUserModal] = useState<boolean>(false);
+  const { setValueInput, valueInput } = useContext(PetContext);
+  function openCloseModal() {
+    setOpenUserModal(!openUserModal);
+  }
 
-    return (
-        <Header>
-            {openUserModal == true ? <UserIconModal /> : null }
-            <section className="header__limit">
-                <div className="header__logos">
-                    <img src={MyPetLogo} className="mpet__logo" />
-                    <img src={MyPet} className="mpet__title" />
-                </div>
-                <div className="input__div">
-                    <input type="text" placeholder="Pesquise!" value={valueInput} onChange={(e)=>{
-                        e.preventDefault();
-                        setValueInput(e.target.value)
-                    }} />
-                    <div className="search__button"><img src={SearchIcon} className="search__icon" onClick={()=> filterProductList(valueInput)}/></div>
+  return (
+    <Header>
+      {openUserModal == true ? <UserIconModal /> : null}
+      <section className="header__limit">
+        <div className="header__logos">
+          <img src={MyPetLogo} className="mpet__logo" />
+          <img src={MyPet} className="mpet__title" />
+        </div>
+        <div className="input__div">
+          <input
+            type="text"
+            placeholder="Pesquise!"
+            value={valueInput}
+            onChange={(e) => {
+              e.preventDefault();
+              setValueInput(e.target.value);
+            }}
+          />
+          <div className="search__button">
+            <img
+              src={SearchIcon}
+              className="search__icon"
+              onClick={() => filterProductList(valueInput)}
+            />
+          </div>
 
-                    <div className="profile__div" onClick={() => {openCloseModal()}}>
-                    <div className="user__circle">
-                    <img src={UserCircle} />
-                    </div>
-
-                </div>
-                </div>
-            </section>
-        </Header>
-    )
+          <div
+            className="profile__div"
+            onClick={() => {
+              openCloseModal();
+            }}
+          >
+            <div className="user__circle">
+              <img src={UserCircle} />
+            </div>
+          </div>
+        </div>
+      </section>
+    </Header>
+  );
 }

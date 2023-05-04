@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Header = styled.header`
     position: fixed;
-    width: 100vw;
+    width: 100%;
     border-radius: 0rem 0rem 0.625rem 0.625rem;
     background-color: var(--primary-color);
     height: 4.475rem;
@@ -91,4 +91,4 @@ export const Header = styled.header`
             }
         }
     }
-    `
+`

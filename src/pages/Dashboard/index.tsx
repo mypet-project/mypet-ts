@@ -8,14 +8,23 @@ import { UserContext } from "../../providers/UserContext";
 import { StyledDashboardPage } from "./style";
 
 export function DashboardPage() {
-  const [emptyStatus, setEmptyStatus] = useState<boolean>(false)
 
+  const {
+    pets,
+    petCardModal,
+    createCardModal,
+    setCreateCardModal,
+    getPets,
+    valueInput,
+    setNewProductList,
+    newProductList,
+    setValueInput
+  } = useContext(PetContext);
+  
   const { getProfile } = useContext(UserContext)
 
-  const { pets, petCardModal, createCardModal, setCreateCardModal, getPets, setNewProductList, newProductList } = useContext(PetContext);
-
   function openModal() {
-    setCreateCardModal(true)
+    setCreateCardModal(true);
   }
 
   useEffect(() => {
@@ -28,26 +37,30 @@ export function DashboardPage() {
 
   useEffect(() => {
     getPets();
-}, [pets])
+  }, [pets]);
 
-function filterProductList(valueInput: string){
-    const newList = pets.filter(
-      (itemPet) => itemPet.name.toLowerCase().includes(valueInput.toLowerCase().trim().normalize()) 
+  const [emptyStatus, setEmptyStatus] = useState<boolean>(false);
+
+  function filterProductList(valueInput: string) {
+    const newList = pets.filter((itemPet) =>
+      itemPet.name
+        .toLowerCase()
+        .includes(valueInput.toLowerCase().trim().normalize())
     );
-    if(newList.length == 0 && valueInput != null ){
-      setEmptyStatus(true)
-    }else{
-      setEmptyStatus(false)
-    setNewProductList(newList)
+    if (newList.length == 0 && valueInput != null) {
+      setEmptyStatus(true);
+    } else {
+      setEmptyStatus(false);
+      setNewProductList(newList);
     }
-}
+  }
 
   return (
     <>
       {petCardModal === true ? <PetModal /> : null}
-      <DashboardHeader filterProductList={filterProductList}/>
+      <DashboardHeader filterProductList={filterProductList} />
       <StyledDashboardPage>
-      {createCardModal === true ? <CreateCardModal /> : null}
+        {createCardModal === true ? <CreateCardModal /> : null}
         <main className="main__page">
           <section className="title__section">
             <div className="pet__title__div">
@@ -55,22 +68,29 @@ function filterProductList(valueInput: string){
                 Pets do mundo todo ao seu alcance!
               </h1>
             </div>
-            <button className="add__button" onClick={() => {openModal()}}>+</button>
+            <button
+              className="add__button"
+              onClick={() => {
+                openModal();
+              }}
+            >
+              +
+            </button>
             <div className="divider__box"></div>
           </section>
           <section className="cards__section">
             <ul>
-              {emptyStatus == true ? <p>Pet não encontrado</p> : 
-                newProductList.length == 0 ? (
-                  pets.map((pet) => {
-                    return <PetCard key={pet.id} pets={pet} />;
-                  })
-                ) : (
-                  newProductList.map((pet) => {
-                    return <PetCard key={pet.id} pets={pet} />;
-                  })
-                )
-              }
+              {emptyStatus == true ? (
+                <p>Pet não encontrado</p>
+              ) : newProductList.length == 0 ? (
+                pets.map((pet) => {
+                  return <PetCard key={pet.id} pets={pet} />;
+                })
+              ) : (
+                newProductList.map((pet) => {
+                  return <PetCard key={pet.id} pets={pet} />;
+                })
+              )}
             </ul>
           </section>
         </main>
