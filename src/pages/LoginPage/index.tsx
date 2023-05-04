@@ -25,7 +25,7 @@ export function LoginPage() {
     submitLogin(formData);
   }
 
-  const token = JSON.parse(localStorage.getItem("@mypet:token") as string)
+  const token = JSON.parse(localStorage.getItem("@mypet:token") as string);
 
   if (token) {
     return <Navigate to="/dashboard" />;
@@ -35,8 +35,6 @@ export function LoginPage() {
     <>
       <LoginHeader />
       <Main>
-        <div className="round__one"></div>
-        <div className="round__two"></div>
         <section
           className="cloud__section"
           style={{ backgroundImage: `url(${CloudBackground})` }}
@@ -44,30 +42,48 @@ export function LoginPage() {
           <div className="pink__section">
             <div className="content__container">
               <div className="left__div">
-                <h1 className="left__title">Conecte-se com suas fotos de pet!</h1>
+                <h1 className="left__title">
+                  Conecte-se com suas fotos de pet!
+                </h1>
                 <p>
                   Junte-se hoje ao MyPet e compartilhe seus momentos mais
-                  marcantes.</p>
-                  <img src={PetImage} className="first__pet__image"/>
+                  marcantes.
+                </p>
+                <img src={PetImage} className="first__pet__image" />
               </div>
 
               <div className="form__container">
                 <form onSubmit={handleSubmit(submit)} className="login__form">
-                  <InputForm label="E-mail" id="email" type="email" register={register("email")} placeholder="Digite seu e-mail..."/>
+                  <InputForm
+                    label="E-mail"
+                    id="email"
+                    type="email"
+                    register={register("email")}
+                    placeholder="Digite seu e-mail..."
+                  />
                   {errors.email ? <p>{errors.email.message}</p> : null}
 
-                  <InputForm label="Senha" id="password" type="password" register={register("password")} placeholder="Digite sua senha..."/>
+                  <InputForm
+                    label="Senha"
+                    id="password"
+                    type="password"
+                    register={register("password")}
+                    placeholder="Digite sua senha..."
+                  />
                   {errors.password ? <p>{errors.password.message}</p> : null}
 
                   <button type="submit">Login</button>
                 </form>
-                <span className="not__registered">Ainda não possui uma conta?</span>
-                <Link to={"/register"} className="register__button">Registre-se</Link>
+                <span className="not__registered">
+                  Ainda não possui uma conta?
+                </span>
+                <Link to={"/register"} className="register__button">
+                  Registre-se
+                </Link>
               </div>
             </div>
           </div>
         </section>
-        <p className="credits">MyPet © KZ-T16</p>
       </Main>
     </>
   );

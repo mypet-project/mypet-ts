@@ -8,7 +8,6 @@ import { UserContext } from "../../providers/UserContext";
 import { StyledDashboardPage } from "./style";
 
 export function DashboardPage() {
-
   const {
     pets,
     petCardModal,
@@ -18,10 +17,10 @@ export function DashboardPage() {
     valueInput,
     setNewProductList,
     newProductList,
-    setValueInput
+    setValueInput,
   } = useContext(PetContext);
-  
-  const { getProfile } = useContext(UserContext)
+
+  const { getProfile } = useContext(UserContext);
 
   function openModal() {
     setCreateCardModal(true);
@@ -29,11 +28,11 @@ export function DashboardPage() {
 
   useEffect(() => {
     getProfile();
-}, [])
+  }, []);
 
   useEffect(() => {
     getPets();
-}, [])
+  }, []);
 
   useEffect(() => {
     getPets();
@@ -53,6 +52,7 @@ export function DashboardPage() {
       setEmptyStatus(false);
       setNewProductList(newList);
     }
+    setValueInput("")
   }
 
   return (
