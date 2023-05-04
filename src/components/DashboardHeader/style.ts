@@ -58,6 +58,7 @@ export const Header = styled.header`
         img {
             width: 1.688rem;
             height: 1.688rem;
+            border-radius: 0px;
         }
     }
 
@@ -80,6 +81,7 @@ export const Header = styled.header`
         img {
             width: 100%;
             height: 100%;
+            border-radius: 22px;
         }
     }
 
@@ -162,6 +164,7 @@ export const Header = styled.header`
         img {
             width: 100%;
             height: 100%;
+            border-radius: 22px;
         }
     }
     }

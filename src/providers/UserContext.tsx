@@ -25,7 +25,9 @@ export interface IUser {
   name: string;
   birthDate: string;
   id: number;
+  img:string;
 }
+
 
 interface IUserContext {
   submitRegister: (
@@ -36,6 +38,9 @@ interface IUserContext {
   user: IUser | null | undefined;
   profile: IUser | null | undefined;
   getProfile: () => Promise<void>
+  modalModifyImage: boolean
+  setModalModifyImage: React.Dispatch<React.SetStateAction<boolean>>
+  changeImageProfile(img: string, profile: IUser): Promise<void>
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -46,6 +51,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [profile, setProfile] = useState<IUser | null | undefined>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [modalModifyImage, setModalModifyImage] = useState<boolean>(false)
 
   const navigate = useNavigate();
 
@@ -59,12 +66,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     };
     try {
       const response = await api.post('/register', newForm);
-      toast.success('Conta criada com sucesso!', {autoClose: 2000});
+      toast.success('Conta criada com sucesso!', { autoClose: 2000 });
       setTimeout(() => {
         navigate('/');
       }, 2500);
     } catch (error: any) {
-      toast.error(error.response.data, {autoClose: 2000});
+      toast.error(error.response.data, { autoClose: 2000 });
     }
   }
 
@@ -74,17 +81,35 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       const response = await api.post('/login', formData);
       const { user: userResponse, accessToken: token } = response.data;
       setUser(userResponse);
-      toast.success('Login feito com sucesso!', {autoClose: 2000});
+      toast.success('Login feito com sucesso!', { autoClose: 2000 });
       localStorage.setItem('@mypet:token', JSON.stringify(token));
       localStorage.setItem('@mypet:userId', JSON.stringify(userResponse.id));
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       navigate('/dashboard');
     } catch (error) {
-      toast.error('Ocorreu um erro!', {autoClose: 2000});
+      toast.error('Ocorreu um erro!', { autoClose: 2000 });
     } finally {
       setLoading(false);
     }
   }
+
+   async function changeImageProfile(img:string, profile:IUser | null | undefined) {
+      const token = JSON.parse(localStorage.getItem('@mypet:token') as string);
+      const userId = JSON.parse(localStorage.getItem('@mypet:userId') as string);
+      const newProfile = {
+        ...profile!, 
+        img: img
+      }
+      try {
+        const { data } = await api.patch(`users/${userId}`,newProfile, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setProfile(newProfile)
+      } catch (error: any) { }
+    }
+
 
   useEffect(() => {
     async function userAutologin() {
@@ -117,13 +142,13 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       localStorage.getItem('@mypet:userId') as string
     );
     try {
-      const { data } = await api.get(`users/${userId}`, {
+      const { data } = await api.get(`/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setProfile(data);
-    } catch (error: any) {}
+    } catch (error: any) { }
   }
 
   useEffect(() => {
@@ -137,10 +162,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   }
 
   return (
-    <UserContext.Provider
-      value={{ submitRegister, submitLogin, logout, user, profile, getProfile }}
-    >
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={{ submitRegister, submitLogin, logout, user, profile, getProfile, modalModifyImage, setModalModifyImage, changeImageProfile }}>{children}</UserContext.Provider>
   );
 };

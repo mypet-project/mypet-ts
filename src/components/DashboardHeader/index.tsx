@@ -6,6 +6,7 @@ import { Header } from "./style";
 import { UserIconModal } from "../UserIconModal";
 import { useContext, useState } from "react";
 import { PetContext } from "../../providers/PetContext";
+import { UserContext } from "../../providers/UserContext";
 
 interface IDashboardHeaderProps {
   filterProductList: (valueInput: string) => void;
@@ -14,6 +15,8 @@ interface IDashboardHeaderProps {
 export function DashboardHeader({ filterProductList }: IDashboardHeaderProps) {
   const [openUserModal, setOpenUserModal] = useState<boolean>(false);
   const { setValueInput, valueInput } = useContext(PetContext);
+  const {profile} = useContext(UserContext)
+
   function openCloseModal() {
     setOpenUserModal(!openUserModal);
   }
@@ -51,7 +54,7 @@ export function DashboardHeader({ filterProductList }: IDashboardHeaderProps) {
             }}
           >
             <div className="user__circle">
-              <img src={UserCircle} />
+              <img src={profile?.img} />
             </div>
           </div>
         </div>
