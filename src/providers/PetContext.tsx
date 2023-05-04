@@ -23,6 +23,11 @@ export interface IRegisterPet {
   adoption: string;
 }
 
+export interface IEditPet {
+  name: string,
+  description: string;
+}
+
 export interface IPetContext {
   pets: IPetData[];
   setPets: (pet: IPetData[]) => void;
@@ -39,6 +44,7 @@ export interface IPetContext {
   setValueInput: React.Dispatch<React.SetStateAction<string>>,
   setNewProductList: React.Dispatch<React.SetStateAction<IPetData[]>>,
   newProductList: IPetData[]
+  editPet: (formData: IEditPet, cardId: number | undefined) => Promise<void>
 }
 
 export const PetContext = createContext({} as IPetContext);
@@ -53,7 +59,6 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
   const [petCardModal, setPetCardModal] = useState<boolean>(false)
 
   const [createCardModal, setCreateCardModal] = useState<boolean>(false)
-
 
   async function getPets() {
     try {
@@ -98,7 +103,17 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
     try {
       await api.delete(`/pets/${cardId}`)
       toast.success("Deletado com sucesso!")
-      setCreateCardModal(false)
+      setPetCardModal(false)
+    } catch (error: any) {
+      toast.error(error.message)
+    }
+  }
+
+  async function editPet(formData: IEditPet, cardId: number | undefined) {
+    try {
+      await api.patch(`/pets/${cardId}`, formData)
+      toast.success("Editado com sucesso!")
+      setPetCardModal(false)
     } catch (error: any) {
       toast.error(error.message)
     }
@@ -121,7 +136,8 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
         valueInput,
         setValueInput,
         setNewProductList,
-        newProductList
+        newProductList,
+        editPet
       }}
     >
       {children}

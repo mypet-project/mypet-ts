@@ -21,6 +21,17 @@ export const PetModalCard = styled.div`
         padding: 1.2rem 1rem 2rem 1rem;
     }
 
+    textarea, input {
+        border: 1px solid var(--primary-gray);
+        width: 100%;
+        border-radius: 0.375rem;
+        padding: 0.5rem;
+    }
+
+    input {
+        width: 80%;
+    }
+
     .title__and__button {
         display: flex;
         justify-content: space-between;
@@ -54,7 +65,7 @@ export const PetModalCard = styled.div`
         color: var(--primary-gray)
     }
 
-    .pet__description{
+    .pet__description {
         font-size: 0.875rem;
     }
 
@@ -66,13 +77,17 @@ export const PetModalCard = styled.div`
         margin-top: 1rem;
     }
 
+    .credits__div {
+        width: 60%;
+    }
+
     h2 {
         font-weight: 700;
         font-size: 1rem;
     }
 
 
-    .remove__button {
+    .remove__button, .edit__button {
         width: 4rem;
         height: 1.65rem;
         background-color: var(--primary-red);
@@ -80,8 +95,19 @@ export const PetModalCard = styled.div`
         font-weight: 700;
         font-size: 0.75rem;
         border-radius: 0.25rem;
+
+        :hover {
+            background-color: var(--secondary-red)
+        }
     }
 
+    .edit__button {
+        background-color: var(--secondary-green);
+
+        :hover {
+            background-color: var(--tertiary-green)
+        }
+    }
 
     @media (min-width: 769px) {
         .pet__modal {
@@ -105,9 +131,10 @@ export const PetModalCard = styled.div`
             font-size: 20px;
         }
 
-        .remove__button {
+        .remove__button, .edit__button {
             width: 102px;
             height: 37px;
+            font-size: 1rem;
         }
     }
 `

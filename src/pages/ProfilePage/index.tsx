@@ -1,34 +1,34 @@
-import { useContext } from "react"
-import { UserContext } from "../../providers/UserContext"
-import { Link } from "react-router-dom"
-import { Header } from "../../components/RegisterHeader/style"
-import MyPet from "../../assets/MyPet.svg";
-import MyPetLogo from "../../assets/MyPetLogo.svg";
-import UserCircle from "../../assets/UserCircle.png";
+import { useContext } from 'react';
+import { UserContext } from '../../providers/UserContext';
+import UserCircle from '../../assets/UserCircle.png';
+import { StyledProfilePage } from './style';
+import { ProfileHeader } from '../../components/ProfileHeader';
 
 export function ProfilePage() {
-    const { profile, logout } = useContext(UserContext)
-    return (
-        <>
-            <Header>
-                <section className="header__limit">
-                    <div className="header__logos">
-                        <img src={MyPetLogo} className="mpet__logo" />
-                        <img src={MyPet} className="mpet__title" />
-                    </div>
-                </section>
-                <img src={UserCircle}></img>
-            </Header>
-            <div>
-                <img src={UserCircle}></img>
-                <h1>{profile?.name}</h1>
-                <p>{profile?.birthDate}<span></span></p>
-                <p>{profile?.email}<span></span></p>
-                <h2>Possivel opcional</h2>
-                <Link to={"/dashboard"}>Home</Link>
-                <button onClick={() => logout()}>Sair</button>
-            </div>
-        </>
+  const { profile } = useContext(UserContext);
+  return (
+    <>
+      <ProfileHeader />
+      <StyledProfilePage>
+        <div className="page__controller">
+        <div className="info__primary">
+          <img className="user__circle" src={UserCircle}></img>
+          <h1>{profile?.name}</h1>
+        </div>
+        <div className="info__secondary">
+          <div className="birth__date">
+            <h2>Data de Nascimento: </h2>
+            <span>{profile?.birthDate}</span>
+          </div>
 
-    )
+          <div className="profile__mail">
+            <h2>E-mail:</h2> <span>{profile?.email}</span>
+          </div>
+        </div>
+        <button className="open__modal__profile">+</button>
+        <div className="divider__box"></div>
+        </div>
+      </StyledProfilePage>
+    </>
+  );
 }

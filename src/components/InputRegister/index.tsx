@@ -14,7 +14,7 @@ export function InputFormRegister ({ errors, label, type, id, register, placehol
 
         return(
             <StyledInput>
-                <div className="divInput">
+                <div className="div__input">
                     {label ? <label htmlFor={id}>{label}</label> : null}
                     <input type={type} id={id} {...register} placeholder={placeholder}/>
                     <span>{errors}</span>

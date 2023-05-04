@@ -4,6 +4,7 @@ import { DashboardHeader } from "../../components/DashboardHeader";
 import { PetCard } from "../../components/PetCard";
 import { PetModal } from "../../components/PetModal";
 import { PetContext } from "../../providers/PetContext";
+import { UserContext } from "../../providers/UserContext";
 import { StyledDashboardPage } from "./style";
 
 export function DashboardPage() {
@@ -19,10 +20,20 @@ export function DashboardPage() {
     newProductList,
     setValueInput
   } = useContext(PetContext);
+  
+  const { getProfile } = useContext(UserContext)
 
   function openModal() {
     setCreateCardModal(true);
   }
+
+  useEffect(() => {
+    getProfile();
+}, [])
+
+  useEffect(() => {
+    getPets();
+}, [])
 
   useEffect(() => {
     getPets();
