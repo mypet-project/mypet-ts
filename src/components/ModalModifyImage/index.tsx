@@ -17,7 +17,7 @@ export function ModalModifyImage() {
                             <button type='button' className="button__close" onClick={() => setModalModifyImage(false)}>X</button>
                         </div>
                         <input type="url" onChange={(event) => setValueInput(event.target.value)}/>
-                        <button type="submit" className="button__edit" onClick={() => changeImageProfile(valueInput, profile!)}>Editar </button>
+                        <button type="submit" className="button__edit" onClick={() => {changeImageProfile(valueInput, profile!), setModalModifyImage(false)}}>Editar </button>
                     </div>
                 </ModifyImage>
             )}
