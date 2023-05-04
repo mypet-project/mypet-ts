@@ -52,6 +52,7 @@ export function DashboardPage() {
       setEmptyStatus(false);
       setNewProductList(newList);
     }
+    setValueInput("")
   }
 
   return (
