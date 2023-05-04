@@ -74,62 +74,62 @@ export const Header = styled.header`
     }
   }
   .user__circle {
-        width: 2.938rem;
-        height: 2.938rem;
-        box-shadow: 0.5rem 0rem 0 var(--primary-green);
-        border-radius: 100%;
+    width: 2.938rem;
+    height: 2.938rem;
+    box-shadow: 0.5rem 0rem 0 var(--primary-green);
+    border-radius: 100%;
 
-        img {
-            width: 100%;
-            height: 100%;
-        }
+    img {
+      width: 100%;
+      height: 100%;
     }
+  }
 
   @media (min-width: 769px) {
     display: flex;
-        flex-direction: row;
-        justify-content: center;
-        height: 84px;
-        
-        .header__limit {
-            width: 70%;
-            gap: 0;
-        }
+    flex-direction: row;
+    justify-content: center;
+    height: 84px;
 
-        .header__logos {
-            width: 200px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .header__limit {
+      width: 70%;
+      gap: 0;
+    }
 
-        .mpet__title {
-          display: block;
-        }
+    .header__logos {
+      width: 200px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .mpet__logo {
-          margin-left: 0;
-        }
+    .mpet__title {
+      display: block;
+    }
 
-        .btn__img__header__profile {
-          gap: 1.75rem;
-        }
+    .mpet__logo {
+      margin-left: 0;
+    }
 
-        .btn__header__profile {
-          gap: 1rem;
-        }
-        
-        .btn__home {
-          width: 92px;
-          height: 41px;
-          font-size: 20px;
-        }
+    .btn__img__header__profile {
+      gap: 1.75rem;
+    }
 
-        .btn__exit {
-          width: 77px;
-          height: 41px;
-          font-size: 20px;
-        }
+    .btn__header__profile {
+      gap: 1rem;
+    }
+
+    .btn__home {
+      width: 92px;
+      height: 41px;
+      font-size: 20px;
+    }
+
+    .btn__exit {
+      width: 77px;
+      height: 41px;
+      font-size: 20px;
+    }
   }
 `;

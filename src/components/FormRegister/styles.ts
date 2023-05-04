@@ -7,6 +7,7 @@ export const StyledFormRegister = styled.form`
   background-color: var(--white);
   border-radius: 22px;
   padding: 23px 34px;
+  gap: 10px;
 
   .container__inputs {
     display: flex;
@@ -20,10 +21,6 @@ export const StyledFormRegister = styled.form`
 
   span {
     color: red;
-    position: absolute;
-    left: 0px;
-    bottom: 1px;
-    z-index: 99;
   }
 
   input {
@@ -91,6 +88,7 @@ export const StyledFormRegister = styled.form`
       button {
         height: 51px;
         font-size: 20px;
+        gap: 25px;
       }
 
       .login__button {
@@ -106,14 +104,6 @@ export const StyledFormRegister = styled.form`
       color: var(--black);
     }
 
-    span {
-      color: red;
-      position: absolute;
-      left: 0px;
-      bottom: 1px;
-      z-index: 99;
-    }
-
     input {
       width: 100%;
       border: 0.063rem solid var(--primary-color);
@@ -126,35 +116,34 @@ export const StyledFormRegister = styled.form`
     }
 
     .container__buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-    button {
-      margin-top: 0.5rem;
-      width: 100%;
-      height: 2.375rem;
-      background: var(--tertiary-green);
-      border-radius: 0.313rem;
-      color: var(--black);
-    }
-
-    p {
-      text-align: center;
-    }
-
-    .login__button {
-      width: 100%;
-      height: 2.375rem;
-      background: var(--black);
-      border-radius: 0.313rem;
-      color: var(--white);
       display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
+      flex-direction: column;
+      gap: 5px;
 
-    }
+      button {
+        margin-top: 0.5rem;
+        width: 100%;
+        height: 2.375rem;
+        background: var(--tertiary-green);
+        border-radius: 0.313rem;
+        color: var(--black);
+      }
+
+      p {
+        text-align: center;
+      }
+
+      .login__button {
+        width: 100%;
+        height: 2.375rem;
+        background: var(--black);
+        border-radius: 0.313rem;
+        color: var(--white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+      }
     }
   }
 `;

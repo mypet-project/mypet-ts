@@ -7,11 +7,14 @@ import { editPostSchema, TEditValues } from "../../validations/editPostSchema";
 import { PetModalCard } from "./style";
 
 export function PetModal() {
-  const { petData, setPetCardModal, deletePet, editPet } = useContext(PetContext);
+  const { petData, setPetCardModal, deletePet, editPet } =
+    useContext(PetContext);
 
-  const [petName, setPetName] = useState<string | undefined>(petData?.name)
-  const [petDescription, setPetDescription] = useState<string | undefined>(petData?.description)
-  
+  const [petName, setPetName] = useState<string | undefined>(petData?.name);
+  const [petDescription, setPetDescription] = useState<string | undefined>(
+    petData?.description
+  );
+
   const { register, handleSubmit } = useForm<TEditValues>({
     resolver: zodResolver(editPostSchema),
   });
@@ -23,7 +26,7 @@ export function PetModal() {
   }
 
   function submit(formData: IEditPet) {
-    editPet(formData, petData?.id)
+    editPet(formData, petData?.id);
   }
 
   return (
@@ -32,7 +35,14 @@ export function PetModal() {
         <form onSubmit={handleSubmit(submit)}>
           <div className="title__and__button">
             {petData?.userId === profile?.id ? (
-              <input type="text" value={petName} onInput={(e) => {setPetName(e.currentTarget.value)}} {...register("name")} />
+              <input
+                type="text"
+                value={petName}
+                onInput={(e) => {
+                  setPetName(e.currentTarget.value);
+                }}
+                {...register("name")}
+              />
             ) : (
               <h1>{petData?.name}</h1>
             )}
@@ -54,7 +64,10 @@ export function PetModal() {
           )}
           {petData?.userId === profile?.id ? (
             <textarea
-              value={petDescription} onInput={(e) => {setPetDescription(e.currentTarget.value)}}
+              value={petDescription}
+              onInput={(e) => {
+                setPetDescription(e.currentTarget.value);
+              }}
               {...register("description")}
             />
           ) : (
@@ -71,19 +84,20 @@ export function PetModal() {
             </div>
 
             {petData?.userId === profile?.id ? (
-              <button className="edit__button" type="submit">Editar</button>
+              <button className="edit__button" type="submit">
+                Editar
+              </button>
             ) : null}
             {petData?.userId === profile?.id ? (
               <button
-              className="remove__button"
-              onClick={() => {
-                deletePet(petData?.id as number)
-              }}
-            >
-              Remover
-            </button>
+                className="remove__button"
+                onClick={() => {
+                  deletePet(petData?.id as number);
+                }}
+              >
+                Remover
+              </button>
             ) : null}
-            
           </div>
         </form>
       </div>
