@@ -6,7 +6,6 @@ import { ModalModifyImage } from '../../components/ModalModifyImage';
 
 export function ProfilePage() {
   const { profile, setModalModifyImage } = useContext(UserContext);
-  console.log(profile)
   return (
     <>
       <ModalModifyImage/>

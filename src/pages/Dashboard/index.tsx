@@ -14,7 +14,6 @@ export function DashboardPage() {
     createCardModal,
     setCreateCardModal,
     getPets,
-    valueInput,
     setNewProductList,
     newProductList,
     setValueInput,
