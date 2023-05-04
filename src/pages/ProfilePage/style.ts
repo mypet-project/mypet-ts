@@ -64,9 +64,5 @@ export const StyledProfilePage = styled.section`
       float: right;
       margin-top: 0;
     }
-    img {
-      width: 30%;
-      height: 30%;
-    }
   }
 `;
