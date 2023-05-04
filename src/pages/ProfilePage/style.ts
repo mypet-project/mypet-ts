@@ -63,13 +63,13 @@ export const StyledProfilePage = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3rem;
+    width: 7.438rem;
     height: 1.813rem;
     border-radius: 0.313rem;
     background-color: var(--tertiary-green);
     font-weight: 600;
-    font-size: 1.688rem;
-    padding-bottom: 0.3rem;
+    font-size: 0.875rem;
+    color: var(--white);
 
     :hover {
             background-color: var(--secondary-green);
@@ -126,11 +126,10 @@ export const StyledProfilePage = styled.section`
     }
 
     .open__modal__profile {
-      width: 68px;
+      width: 162px;
       height: 41px;
       font-weight: 600;
-      font-size: 36px;
-      padding-bottom: 10px;
+      font-size: 20px;
     }
   }
 `;

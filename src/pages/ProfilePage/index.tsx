@@ -25,7 +25,7 @@ export function ProfilePage() {
             <h2>E-mail:</h2> <span>{profile?.email}</span>
           </div>
         </div>
-        <button className="open__modal__profile">+</button>
+        <button className="open__modal__profile">Editar Imagem</button>
         <div className="divider__box"></div>
         </div>
       </StyledProfilePage>
