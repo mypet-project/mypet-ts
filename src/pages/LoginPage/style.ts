@@ -7,7 +7,6 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-  padding-bottom: 65px;
 
   .cloud__section {
     margin-top: 8rem;
@@ -99,7 +98,6 @@ export const Main = styled.main`
   }
 
   @media (min-width: 769px) {
-    padding: 165px 0;
     .cloud__section {
       margin-top: 150px;
     }
