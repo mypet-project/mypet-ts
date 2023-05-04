@@ -36,7 +36,6 @@ export const StyledRegisterPage = styled.main`
   }
 
   @media (min-width: 769px) {
-    padding: 165px 0;
     .cloud__section {
       margin: 9.375rem 0;
     }
