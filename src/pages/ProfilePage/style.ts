@@ -27,7 +27,7 @@ export const StyledProfilePage = styled.section`
   h1 {
     font-size: 1.25rem;
     font-weight: 700;
-    }
+  }
 
   h2 {
     font-weight: 700;
@@ -72,8 +72,8 @@ export const StyledProfilePage = styled.section`
     padding-bottom: 0.3rem;
 
     :hover {
-            background-color: var(--secondary-green);
-        }
+      background-color: var(--secondary-green);
+    }
   }
 
   .divider__box {
@@ -83,7 +83,8 @@ export const StyledProfilePage = styled.section`
     margin: 1rem 0rem 3rem 0rem;
   }
 
-  .birth__date, .profile__mail {
+  .birth__date,
+  .profile__mail {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -91,7 +92,7 @@ export const StyledProfilePage = styled.section`
   }
 
   @media (min-width: 769px) {
-    .page__controller { 
+    .page__controller {
       width: 70%;
       padding-top: 100px;
       height: 100%;

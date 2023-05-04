@@ -8,26 +8,39 @@ export interface IPetsProps {
 }
 
 export const PetCard = ({ pets }: IPetsProps) => {
-  const { setPetData, setPetCardModal, deletePet } = useContext(PetContext)
-  const { profile } = useContext(UserContext)
+  const { setPetData, setPetCardModal, deletePet } = useContext(PetContext);
+  const { profile } = useContext(UserContext);
 
-  function openCardModal () {
-    setPetCardModal(true)
+  function openCardModal() {
+    setPetCardModal(true);
   }
 
-  function getPetModalData (pets: IPetData) {
-    setPetData(pets)
+  function getPetModalData(pets: IPetData) {
+    setPetData(pets);
   }
-
 
   return (
-    <li className="card" onClick={() => {getPetModalData(pets), openCardModal()}}>
-      <img src={pets.img} alt={pets.name}/>
+    <li
+      className="card"
+      onClick={() => {
+        getPetModalData(pets), openCardModal();
+      }}
+    >
+      <img src={pets.img} alt={pets.name} />
       <div className="card__body">
-        <h1 className="card__title">{pets.name.length > 15 ? pets.name.slice(0, 14) + "..." : pets.name}</h1>
+        <h1 className="card__title">
+          {pets.name.length > 15 ? pets.name.slice(0, 14) + "..." : pets.name}
+        </h1>
 
-        
-        {pets.userId === profile?.id ? <img src={DeleteIcon} className="delete__button" onClick={(e) => {e.stopPropagation(), deletePet(pets.id)}}/> : null}
+        {pets.userId === profile?.id ? (
+          <img
+            src={DeleteIcon}
+            className="delete__button"
+            onClick={(e) => {
+              e.stopPropagation(), deletePet(pets.id);
+            }}
+          />
+        ) : null}
       </div>
     </li>
   );

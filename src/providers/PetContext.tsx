@@ -17,14 +17,14 @@ export interface IPetData {
 }
 
 export interface IRegisterPet {
-  name: string,
+  name: string;
   img: string;
   description: string;
   adoption: string;
 }
 
 export interface IEditPet {
-  name: string,
+  name: string;
   description: string;
 }
 
@@ -32,19 +32,22 @@ export interface IPetContext {
   pets: IPetData[];
   setPets: (pet: IPetData[]) => void;
   petData: IPetData | null;
-  setPetData: React.Dispatch<React.SetStateAction<IPetData | null>>
+  setPetData: React.Dispatch<React.SetStateAction<IPetData | null>>;
   petCardModal: boolean;
-  setPetCardModal: React.Dispatch<React.SetStateAction<boolean>>
+  setPetCardModal: React.Dispatch<React.SetStateAction<boolean>>;
   createCardModal: boolean;
-  setCreateCardModal: React.Dispatch<React.SetStateAction<boolean>>
-  registerPet: (registerPetData: IRegisterPet, profileId: number | undefined) => Promise<void>
-  deletePet: (cardId: number) => Promise<void>
-  getPets: () => Promise<void>,
-  valueInput: string, 
-  setValueInput: React.Dispatch<React.SetStateAction<string>>,
-  setNewProductList: React.Dispatch<React.SetStateAction<IPetData[]>>,
-  newProductList: IPetData[]
-  editPet: (formData: IEditPet, cardId: number | undefined) => Promise<void>
+  setCreateCardModal: React.Dispatch<React.SetStateAction<boolean>>;
+  registerPet: (
+    registerPetData: IRegisterPet,
+    profileId: number | undefined
+  ) => Promise<void>;
+  deletePet: (cardId: number) => Promise<void>;
+  getPets: () => Promise<void>;
+  valueInput: string;
+  setValueInput: React.Dispatch<React.SetStateAction<string>>;
+  setNewProductList: React.Dispatch<React.SetStateAction<IPetData[]>>;
+  newProductList: IPetData[];
+  editPet: (formData: IEditPet, cardId: number | undefined) => Promise<void>;
 }
 
 export const PetContext = createContext({} as IPetContext);
@@ -54,11 +57,11 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
   const [newProductList, setNewProductList] = useState<IPetData[]>([]);
   const [valueInput, setValueInput] = useState("");
 
-  const [petData, setPetData] = useState<IPetData | null>(null)
+  const [petData, setPetData] = useState<IPetData | null>(null);
 
-  const [petCardModal, setPetCardModal] = useState<boolean>(false)
+  const [petCardModal, setPetCardModal] = useState<boolean>(false);
 
-  const [createCardModal, setCreateCardModal] = useState<boolean>(false)
+  const [createCardModal, setCreateCardModal] = useState<boolean>(false);
 
   async function getPets() {
     try {
@@ -73,7 +76,7 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
       });
       setPets(response.data);
     } catch (error: any) {
-      toast.error(error)
+      toast.error(error);
     }
   }
 
@@ -81,41 +84,43 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
     getPets();
   }, []);
 
-  async function registerPet(registerPetData: IRegisterPet, 
-    userId: number | undefined) {
-      const registerData = {
-        name: registerPetData.name,
-        img: registerPetData.img,
-        description: registerPetData.description,
-        adoption: registerPetData.adoption,
-        userId: userId
-      }
+  async function registerPet(
+    registerPetData: IRegisterPet,
+    userId: number | undefined
+  ) {
+    const registerData = {
+      name: registerPetData.name,
+      img: registerPetData.img,
+      description: registerPetData.description,
+      adoption: registerPetData.adoption,
+      userId: userId,
+    };
     try {
-      await api.post("/pets", registerData)
-      toast.success("Post criado com sucesso!",{autoClose: 2000}) 
-      setCreateCardModal(false)
+      await api.post("/pets", registerData);
+      toast.success("Post criado com sucesso!", { autoClose: 2000 });
+      setCreateCardModal(false);
     } catch (error: any) {
-      toast.error(error.message, {autoClose: 2000})
+      toast.error(error.message, { autoClose: 2000 });
     }
   }
 
   async function deletePet(cardId: number) {
     try {
-      await api.delete(`/pets/${cardId}`)
-      toast.success("Deletado com sucesso!", {autoClose: 2000})
-      setPetCardModal(false)
+      await api.delete(`/pets/${cardId}`);
+      toast.success("Deletado com sucesso!", { autoClose: 2000 });
+      setPetCardModal(false);
     } catch (error: any) {
-      toast.error(error.message, {autoClose: 2000})
+      toast.error(error.message, { autoClose: 2000 });
     }
   }
 
   async function editPet(formData: IEditPet, cardId: number | undefined) {
     try {
-      await api.patch(`/pets/${cardId}`, formData)
-      toast.success("Editado com sucesso!", {autoClose: 2000})
-      setPetCardModal(false)
+      await api.patch(`/pets/${cardId}`, formData);
+      toast.success("Editado com sucesso!", { autoClose: 2000 });
+      setPetCardModal(false);
     } catch (error: any) {
-      toast.error(error.message, {autoClose: 2000})
+      toast.error(error.message, { autoClose: 2000 });
     }
   }
 
@@ -137,7 +142,7 @@ export const PetProvider = ({ children }: IDefaultPetsProviderProps) => {
         setValueInput,
         setNewProductList,
         newProductList,
-        editPet
+        editPet,
       }}
     >
       {children}

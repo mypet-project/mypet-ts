@@ -8,8 +8,7 @@ import { UserContext } from "../../providers/UserContext";
 import { Header } from "./styled";
 
 export function ProfileHeader() {
-  const { profile, logout } = useContext(UserContext);
-
+  const {  logout } = useContext(UserContext);
 
   return (
     <Header>
@@ -20,17 +19,16 @@ export function ProfileHeader() {
         </div>
 
         <div className="btn__img__header__profile">
-        <div className="btn__header__profile">
-          <Link className="btn__home" to={"/dashboard"}>
-            Home
-          </Link>
-          <Link className="btn__exit" onClick={() => logout()} to={"/"}>
-            Sair
-          </Link>
+          <div className="btn__header__profile">
+            <Link className="btn__home" to={"/dashboard"}>
+              Home
+            </Link>
+            <Link className="btn__exit" onClick={() => logout()} to={"/"}>
+              Sair
+            </Link>
+          </div>
+          <img className="user__circle" src={UserCircle}></img>
         </div>
-        <img className="user__circle" src={UserCircle}></img>
-      </div>
-      
       </section>
     </Header>
   );

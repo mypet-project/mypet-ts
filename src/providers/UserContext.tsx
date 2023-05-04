@@ -1,7 +1,7 @@
-import { createContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { api } from '../services/api';
+import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { api } from "../services/api";
 
 interface IUserProviderProps {
   children: React.ReactNode;
@@ -35,7 +35,7 @@ interface IUserContext {
   logout: () => void;
   user: IUser | null | undefined;
   profile: IUser | null | undefined;
-  getProfile: () => Promise<void>
+  getProfile: () => Promise<void>;
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -51,36 +51,36 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   async function submitRegister(formaRegisterData: ISubmitRegisterParameter) {
     const newForm = {
-      img: 'https://cdn.icon-icons.com/icons2/472/PNG/48/user_male_circle-48_45856.png',
+      img: "https://cdn.icon-icons.com/icons2/472/PNG/48/user_male_circle-48_45856.png",
       birthDate: formaRegisterData.birthDate,
       email: formaRegisterData.email,
       password: formaRegisterData.password,
       name: formaRegisterData.name,
     };
     try {
-      const response = await api.post('/register', newForm);
-      toast.success('Conta criada com sucesso!', {autoClose: 2000});
+      const response = await api.post("/register", newForm);
+      toast.success("Conta criada com sucesso!", { autoClose: 2000 });
       setTimeout(() => {
-        navigate('/');
+        navigate("/");
       }, 2500);
     } catch (error: any) {
-      toast.error(error.response.data, {autoClose: 2000});
+      toast.error(error.response.data, { autoClose: 2000 });
     }
   }
 
   async function submitLogin(formData: ILogin) {
     try {
       setLoading(true);
-      const response = await api.post('/login', formData);
+      const response = await api.post("/login", formData);
       const { user: userResponse, accessToken: token } = response.data;
       setUser(userResponse);
-      toast.success('Login feito com sucesso!', {autoClose: 2000});
-      localStorage.setItem('@mypet:token', JSON.stringify(token));
-      localStorage.setItem('@mypet:userId', JSON.stringify(userResponse.id));
+      toast.success("Login feito com sucesso!", { autoClose: 2000 });
+      localStorage.setItem("@mypet:token", JSON.stringify(token));
+      localStorage.setItem("@mypet:userId", JSON.stringify(userResponse.id));
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (error) {
-      toast.error('Ocorreu um erro!', {autoClose: 2000});
+      toast.error("Ocorreu um erro!", { autoClose: 2000 });
     } finally {
       setLoading(false);
     }
@@ -89,8 +89,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   useEffect(() => {
     async function userAutologin() {
       try {
-        const sToken = localStorage.getItem('@mypet:token');
-        const sUserId = localStorage.getItem('@mypet:userId');
+        const sToken = localStorage.getItem("@mypet:token");
+        const sUserId = localStorage.getItem("@mypet:userId");
         const token = sToken && JSON.parse(sToken);
         const userId = sUserId && JSON.parse(sUserId);
         setLoading(true);
@@ -98,7 +98,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         if (token && userId) {
           const { data } = await api.get<IUser>(`/users/${userId}`);
           setUser(data);
-          navigate('/dashboard');
+          navigate("/dashboard");
         } else {
           throw new Error();
         }
@@ -112,10 +112,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   }, []);
 
   async function getProfile() {
-    const token = JSON.parse(localStorage.getItem('@mypet:token') as string);
-    const userId = JSON.parse(
-      localStorage.getItem('@mypet:userId') as string
-    );
+    const token = JSON.parse(localStorage.getItem("@mypet:token") as string);
+    const userId = JSON.parse(localStorage.getItem("@mypet:userId") as string);
     try {
       const { data } = await api.get(`users/${userId}`, {
         headers: {
@@ -131,8 +129,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   }, []);
 
   function logout() {
-    localStorage.removeItem('@mypet:token');
-    localStorage.removeItem('@mypet:userId');
+    localStorage.removeItem("@mypet:token");
+    localStorage.removeItem("@mypet:userId");
     setUser(null);
   }
 
