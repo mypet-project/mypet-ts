@@ -67,6 +67,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       toast.error(error.response.data, { autoClose: 2000 });
     }
   }
+  
 
   async function submitLogin(formData: ILogin) {
     try {
